@@ -5,6 +5,20 @@
 如要了解详细的功能实现,请查看源代码!
 * 源代码 : <a href="https://github.com/AcmenXD/AndroidFrame">AcmenXD/AndroidFrame</a>
 
+### 依赖
+---
+- AndroidStudio
+```
+	allprojects {
+            repositories {
+                ...
+                maven { url 'https://jitpack.io' }
+            }
+	}
+```
+```
+	 compile 'com.github.AcmenXD:AndroidFrame:1.1'
+```
 ### 功能
 ---
 - 框架对<a href="https://github.com/AcmenXD">com.github.AcmenXD</a>:<a href="https://github.com/AcmenXD/Toaster">Toaster</a> | <a href="https://github.com/AcmenXD/SpTool">SpTool</a> | <a href="https://github.com/AcmenXD/Retrofit">Retrofit</a> | <a href="https://github.com/AcmenXD/Logger">Logger</a> | <a href="https://github.com/AcmenXD/Marketer">Marketer</a> | <a href="https://github.com/AcmenXD/RecyclerView">RecyclerView</a>做好配置支持
