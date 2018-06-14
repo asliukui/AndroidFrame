@@ -19,6 +19,49 @@
 ```
 	 compile 'com.github.AcmenXD:AndroidFrame:1.1'
 ```
+### 混淆
+---
+```
+     # 继承类混淆配置
+     -keep interface com.acmenxd.frame.utils.proguard.** { *; }
+     -keep class * implements com.acmenxd.frame.utils.proguard.IKeepClass
+     -keepnames class * implements com.acmenxd.frame.utils.proguard.IKeepClassName
+     -keepclassmembers class * implements com.acmenxd.frame.utils.proguard.IKeepFieldName {
+         <fields>;
+     }
+     -keepclassmembers class * implements com.acmenxd.frame.utils.proguard.IKeepPublicFieldName {
+         public <fields>;
+     }
+     -keepclassmembers class * implements com.acmenxd.frame.utils.proguard.IKeepMethodName {
+         <methods>;
+     }
+     -keepclassmembers class * implements com.acmenxd.frame.utils.proguard.IKeepPublicMethodName {
+         public <methods>;
+     }
+
+     # 依赖库混淆配置
+     #rxjava & rxandroid
+     -dontwarn sun.misc.**
+     -keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
+         long producerIndex;
+         long consumerIndex;
+     }
+     -keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+         rx.internal.util.atomic.LinkedQueueNode producerNode;
+     }
+     -keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
+         rx.internal.util.atomic.LinkedQueueNode consumerNode;
+     }
+     #okhttp3
+     -dontwarn okio.**
+     -dontwarn okhttp3.**
+     -dontwarn com.squareup.okhttp3.**
+     #retrofit2
+     -dontwarn retrofit2.**
+     -keep class retrofit2.** { *; }
+     -keepattributes Signature
+     -keepattributes Exceptions
+```
 ### 功能
 ---
 - 框架对<a href="https://github.com/AcmenXD">com.github.AcmenXD</a>:<a href="https://github.com/AcmenXD/Toaster">Toaster</a> | <a href="https://github.com/AcmenXD/SpTool">SpTool</a> | <a href="https://github.com/AcmenXD/Retrofit">Retrofit</a> | <a href="https://github.com/AcmenXD/Logger">Logger</a> | <a href="https://github.com/AcmenXD/Marketer">Marketer</a> | <a href="https://github.com/AcmenXD/RecyclerView">RecyclerView</a>做好配置支持
