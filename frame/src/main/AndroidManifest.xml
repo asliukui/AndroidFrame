@@ -1,8 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.acmenxd.frame">
 
+    <!--网络状态-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!--IMEI获取-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <!--兼容8.0 安装应用权限-->
+    <!--兼容7.1以上 安装应用权限-->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
 </manifest>

@@ -33,7 +33,7 @@ public final class ApkUtils {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             data = Uri.fromFile(uriFile);
         } else {
-            // 兼容7.0
+            // 兼容7.0以上
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             data = FileProvider.getUriForFile(context, "com.acmenxd.frame.fileprovider", uriFile);
         }
