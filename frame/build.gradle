@@ -20,7 +20,7 @@ android {
     }
 }
 dependencies {
-    api files('libs/pinyin4j-2.5.0.jar')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     api config.system.appcompatV7
     api config.recyclerview
     api config.marketer
