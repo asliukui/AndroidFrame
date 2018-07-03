@@ -20,14 +20,14 @@ android {
     }
 }
 dependencies {
-    compile files('libs/pinyin4j-2.5.0.jar')
-    compile config.system.appcompatV7
-    compile config.marketer
-    compile config.recyclerview
-    compile config.http.okhttp
-    compile config.http.retrofit
-    compile config.http.retrofit_gson
-    compile config.http.retrofit_rxjava
-    compile config.rxandroid
-    compile config.rxpermissions
+    api files('libs/pinyin4j-2.5.0.jar')
+    api config.system.appcompatV7
+    api config.recyclerview
+    api config.marketer
+    api config.http.okhttp
+    api config.http.retrofit
+    api config.http.retrofit_gson
+    api config.http.retrofit_rxjava
+    api config.rxandroid
+    api config.rxpermissions
 }
