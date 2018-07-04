@@ -20,7 +20,7 @@ android {
     }
 }
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    api fileTree(dir: 'libs', include: ['*.jar'])
     api config.system.appcompatV7
     api config.recyclerview
     api config.marketer
