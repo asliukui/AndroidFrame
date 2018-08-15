@@ -57,14 +57,6 @@ public final class PersistentCookieStore {
         }
     }
 
-    /**
-     * 兼容域名不一致情况
-     * 另多域名共用Cookie时配置
-     */
-    public String compatibilityMultitypeHost(String urlHost) {
-        return urlHost;
-    }
-
     /* 此种方式会导致程序崩溃
     protected String getCookieToken(@NonNull Cookie cookie) {
         return cookie.name() + "@" + cookie.domain();
@@ -90,6 +82,20 @@ public final class PersistentCookieStore {
         cookieSp.putString(host, TextUtils.join(",", cookies.get(host).keySet()));
         cookieSp.putString(name, encodeCookie(new NetCookies(cookie)));
     }*/
+
+    /**
+     * 兼容域名不一致情况
+     * 另多域名共用Cookie时配置
+     */
+    protected String compatibilityMultitypeHost(String urlHost) {
+        /*if (urlHost.equals("m.nuojinsuo.cn")
+                || urlHost.equals("ups.nuojinsuo.cn")
+                || urlHost.equals("pay.nuojinsuo.cn")
+                || urlHost.equals("static.nuojinsuo.cn")) {
+            return "nuojinsuo.cn";
+        }*/
+        return urlHost;
+    }
 
     protected String getCookieToken(@NonNull Cookie cookie) {
         return cookie.name();
@@ -136,11 +142,6 @@ public final class PersistentCookieStore {
         return ret;
     }
 
-    public void removeAll() {
-        cookies.clear();
-        cookieSp.clear();
-    }
-
     public boolean remove(@NonNull HttpUrl url, @NonNull Cookie cookie) {
         String host = compatibilityMultitypeHost(url.host());
         String name = getCookieToken(cookie);
@@ -154,6 +155,11 @@ public final class PersistentCookieStore {
         } else {
             return false;
         }
+    }
+
+    public void removeAll() {
+        cookies.clear();
+        cookieSp.clear();
     }
 
     /**
