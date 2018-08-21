@@ -9,7 +9,7 @@ import android.support.annotation.NonNull;
 
 import com.acmenxd.frame.basis.FrameApplication;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @author AcmenXD
@@ -22,14 +22,12 @@ public final class Monitor {
     private static Monitor mInstance = null;
     private Context mContext = null;
     private ConnectionChangeReceiver mConnectionChangeReceiver = null;
-    private ArrayList<IMonitorListener> mListeners = new ArrayList<>();
+    private CopyOnWriteArrayList<IMonitorListener> mListeners = new CopyOnWriteArrayList<>();
 
     private class ConnectionChangeReceiver extends BroadcastReceiver {
         public void onReceive(Context context, Intent intent) {
-            synchronized (mListeners) {
-                for (IMonitorListener monitorListener : mListeners) {
-                    monitorListener.onConnectionChange(NetUtils.getNetStatus());
-                }
+            for (IMonitorListener monitorListener : mListeners) {
+                monitorListener.onConnectionChange(NetUtils.getNetStatus());
             }
         }
     }
@@ -37,13 +35,9 @@ public final class Monitor {
     /**
      * 初始化 -> BaseApplication中调用
      */
-    public static synchronized void init() {
+    public static void init() {
         if (mInstance == null) {
-            synchronized (Monitor.class) {
-                if (mInstance == null) {
-                    mInstance = new Monitor();
-                }
-            }
+            mInstance = new Monitor();
         }
     }
 
@@ -62,30 +56,24 @@ public final class Monitor {
             mContext.unregisterReceiver(mConnectionChangeReceiver);
             mConnectionChangeReceiver = null;
         }
-        synchronized (mListeners) {
-            mListeners.clear();
-        }
+        mListeners.clear();
         mInstance = null;
     }
 
     private boolean mRegistListener(@NonNull IMonitorListener listener) {
-        synchronized (mListeners) {
-            if ((listener != null) && !mListeners.contains(listener)) {
-                mListeners.add(listener);
-                return true;
-            } else {
-                return false;
-            }
+        if ((listener != null) && !mListeners.contains(listener)) {
+            mListeners.add(listener);
+            return true;
+        } else {
+            return false;
         }
     }
 
     private boolean mUnRegistListener(@NonNull IMonitorListener listener) {
-        synchronized (mListeners) {
-            if (listener != null) {
-                return mListeners.remove(listener);
-            } else {
-                return false;
-            }
+        if (listener != null) {
+            return mListeners.remove(listener);
+        } else {
+            return false;
         }
     }
 

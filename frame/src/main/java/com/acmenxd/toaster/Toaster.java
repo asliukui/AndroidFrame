@@ -59,7 +59,7 @@ public final class Toaster {
     }
 
     // Toast 表
-    private static Map<Long, Toast2> tMap = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<Long, Toast2> tMap = new ConcurrentHashMap<>();
     private static long mTId = 10000; //每个Toast的唯一Id
     // 默认的一些参数
     private static int gravity = Gravity.CENTER;

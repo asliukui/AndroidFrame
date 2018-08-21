@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -32,11 +31,11 @@ import okhttp3.HttpUrl;
 public final class PersistentCookieStore {
     private final SpTool cookieSp;
     private final String cookieSpName = "spCookie";
-    private final Map<String, ConcurrentHashMap<String, Cookie>> cookies;
+    private final ConcurrentHashMap<String, ConcurrentHashMap<String, Cookie>> cookies;
 
     public PersistentCookieStore() {
         cookieSp = SpManager.getSp(cookieSpName);
-        cookies = new HashMap<>();
+        cookies = new ConcurrentHashMap<>();
 
         // 将持久化的cookies缓存到内存中 即map cookies
         Map<String, ?> prefsMap = cookieSp.getAll();

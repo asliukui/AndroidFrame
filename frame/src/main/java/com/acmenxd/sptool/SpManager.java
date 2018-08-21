@@ -26,7 +26,7 @@ public final class SpManager {
     /**
      * 存储全局Sp实例
      */
-    private static Map<String, SpTool> spMap = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, SpTool> spMap = new ConcurrentHashMap<>();
 
     /**
      * 设置Context对象
