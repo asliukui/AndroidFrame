@@ -51,15 +51,6 @@ public final class Monitor {
         }
     }
 
-    public void mRelease() {
-        if (mConnectionChangeReceiver != null) {
-            mContext.unregisterReceiver(mConnectionChangeReceiver);
-            mConnectionChangeReceiver = null;
-        }
-        mListeners.clear();
-        mInstance = null;
-    }
-
     private boolean mRegistListener(@NonNull IMonitorListener listener) {
         if ((listener != null) && !mListeners.contains(listener)) {
             mListeners.add(listener);
@@ -75,6 +66,15 @@ public final class Monitor {
         } else {
             return false;
         }
+    }
+
+    private void mRelease() {
+        if (mConnectionChangeReceiver != null) {
+            mContext.unregisterReceiver(mConnectionChangeReceiver);
+            mConnectionChangeReceiver = null;
+        }
+        mListeners.clear();
+        mInstance = null;
     }
 
     /**
