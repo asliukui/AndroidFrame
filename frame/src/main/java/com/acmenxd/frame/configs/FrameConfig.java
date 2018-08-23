@@ -1,6 +1,7 @@
 package com.acmenxd.frame.configs;
 
 import android.os.Environment;
+import android.support.annotation.CallSuper;
 
 import com.acmenxd.logger.LogTag;
 import com.acmenxd.logger.LogType;
@@ -14,29 +15,33 @@ import com.acmenxd.toaster.ToastNW;
  * @date 2017/5/25 10:02
  * @detail 配置详细参数类
  */
-public abstract class FrameConfig {
+public class FrameConfig {
     protected FrameConfig() {
+        DEBUG = false;
+        LOG_OPEN = DEBUG;
+        TOAST_DEBUG_OPEN = DEBUG;
         init();
     }
 
     protected FrameConfig(boolean isDebug) {
         DEBUG = isDebug;
-        LOG_OPEN = isDebug;
-        TOAST_DEBUG_OPEN = isDebug;
-
+        LOG_OPEN = DEBUG;
+        TOAST_DEBUG_OPEN = DEBUG;
         init();
     }
 
     /**
      * 初始化
      */
-    protected abstract void init();
+    @CallSuper
+    protected void init() {
+
+    }
 
     /**
      * 调试模式开关
-     * * 由build.gradle -> debug | release版本控制
      */
-    protected boolean DEBUG = false;
+    protected final boolean DEBUG;
 
     /**
      * 数据库 配置
@@ -67,14 +72,14 @@ public abstract class FrameConfig {
     // Log显示等级, >= LOG_LEVEL的log显示
     public LogType LOG_LEVEL = LogType.V;
     // Log开关
-    protected boolean LOG_OPEN = DEBUG;
+    protected final boolean LOG_OPEN;
 
     /**
      * Toast 配置
      * * Toast 有Debug模式,正式上线版本将不会显示debug模式下的Toast
      */
     // Toast调试开关
-    protected boolean TOAST_DEBUG_OPEN = DEBUG;
+    protected final boolean TOAST_DEBUG_OPEN;
     // Toast默认显示时长
     protected ToastDuration TOAST_DURATION = ToastDuration.SHORT;
     // Toast显示方式 : Toast需要等待,并逐个显示 | Toast无需等待,直接显示

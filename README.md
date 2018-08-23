@@ -17,7 +17,7 @@
 	}
 ```
 ```
-	 compile 'com.github.AcmenXD:AndroidFrame:1.6'
+	 compile 'com.github.AcmenXD:AndroidFrame:1.7'
 ```
 ### 混淆
 ---
