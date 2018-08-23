@@ -7,8 +7,8 @@ import android.os.Debug;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 
-import com.acmenxd.frame.configs.FrameConfig;
 import com.acmenxd.frame.configs.ConfigBuilder;
+import com.acmenxd.frame.configs.FrameConfig;
 import com.acmenxd.frame.utils.CrashUtils;
 import com.acmenxd.frame.utils.DateUtils;
 import com.acmenxd.frame.utils.FileUtils;
@@ -77,10 +77,8 @@ public abstract class FrameApplication extends Application {
      * 初始化配置
      */
     protected final void initFrameSetting(@NonNull Class<? extends FrameConfig> pConfig, @NonNull boolean isDebug) {
-        // 创建配置Info
+        // 创建模块配置
         ConfigBuilder.createConfig(pConfig, isDebug);
-        // 初始化模块配置
-        ConfigBuilder.init();
         // 初始化File配置
         FileUtils.init();
         // 初始化网络监听配置

@@ -1,7 +1,6 @@
 package com.acmenxd.frame.configs;
 
 import android.os.Environment;
-import android.support.annotation.CallSuper;
 
 import com.acmenxd.logger.LogTag;
 import com.acmenxd.logger.LogType;
@@ -16,11 +15,7 @@ import com.acmenxd.toaster.ToastNW;
  * @detail 配置详细参数类
  */
 public class FrameConfig {
-    /**
-     * 初始化
-     */
-    @CallSuper
-    protected void init(boolean isDebug) {
+    protected FrameConfig(boolean isDebug) {
         DEBUG = isDebug;
         LOG_OPEN = isDebug;
         TOAST_DEBUG_OPEN = isDebug;
@@ -81,9 +76,9 @@ public class FrameConfig {
     protected String BASE_URL = "";
     // Net Log 的日志Tag
     protected LogTag NET_LOG_TAG = LogTag.mk("NetLog");
-    // Net Log 的日志显示形式 -> 是否显示 "请求头 请求体 响应头 错误日志" 等详情
+    // Net Log 的日志显示形式 -> 是否显示 "请求头 请求体 响应头 错误日志" 日志
     protected boolean NET_LOG_DETAILS = true;
-    // Net Log 的日志显示形式 -> 是否显示请求过程中的日志,包含详细的请求头日志
+    // Net Log 的日志显示形式 -> 是否显示请求过程中的日志,包含详细的请求日志
     protected boolean NET_LOG_DETAILS_All = false;
     // 非Form表单形式的请求体,是否加入公共Body
     protected boolean NOFORMBODY_CANADDBODY = false;
