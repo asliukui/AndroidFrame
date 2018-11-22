@@ -88,12 +88,10 @@ public abstract class FrameFragment extends Fragment implements IFrameSubscripti
     private int customStatusBarColorId_noCan = 0; // 自定义状态栏背景色 - 不可行时
     private boolean isCanCustomStatusBarColor = false; // 是否支持自定义状态栏
     protected int customStatusBarMode = 0; // 状态栏模式 : 0-跟随父Activity  1-自定义背景色  2-浅色模式+自定义背景色  3-深色模式+自定义背景色
-    // Fragment取消预加载后的显隐处理
-    private boolean viewPagerFragmentVisible;
-    // Fragment取消预加载后的首次显示处理
-    private boolean viewPagerFragmentFirstVisible;
+    // Fragment取消预加载后的显隐状态
+    private boolean mFragmentVisible;
     // Fragment取消预加载后的显示计数(第一次显示计数为1)
-    private int viewPagerFragmentVisibleIndex;
+    private int mFragmentVisibleIndex;
     // 网络状态监控
     private IMonitorListener mNetListener = new IMonitorListener() {
         @Override
@@ -211,24 +209,17 @@ public abstract class FrameFragment extends Fragment implements IFrameSubscripti
     }
 
     /**
-     * Fragment取消预加载后,首次显示时回调函数
-     */
-    @CallSuper
-    protected void onViewPagerFragmentFirstVisible() {
-    }
-
-    /**
      * Fragment取消预加载后,显示时回调函数
      */
     @CallSuper
-    protected void onViewPagerFragmentVisible(@IntRange(from = 0) int viewPagerFragmentVisibleIndex) {
+    protected void onFragmentVisible(@IntRange(from = 0) int pFragmentVisibleIndex) {
     }
 
     /**
      * Fragment取消预加载后,隐藏时回调函数
      */
     @CallSuper
-    protected void onViewPagerFragmentInVisible(@IntRange(from = 0) int viewPagerFragmentVisibleIndex) {
+    protected void onFragmentInVisible(@IntRange(from = 0) int pFragmentVisibleIndex) {
     }
 
     /**
@@ -321,47 +312,32 @@ public abstract class FrameFragment extends Fragment implements IFrameSubscripti
     }
 
     /**
-     * ViewPagerFragment取消预加载处理
+     * Fragment取消预加载处理
      */
     @Override
     public final void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (getUserVisibleHint()) {
-            viewPagerFragmentVisible = true;
-            viewPagerFragmentVisibleIndex++;
-            if (viewPagerFragmentVisibleIndex == 1) {
-                viewPagerFragmentFirstVisible = true;
-                onViewPagerFragmentFirstVisible();
-            } else {
-                viewPagerFragmentFirstVisible = false;
-            }
-            onViewPagerFragmentVisible(viewPagerFragmentVisibleIndex);
+        mFragmentVisible = getUserVisibleHint();
+        if (mFragmentVisible) {
+            mFragmentVisibleIndex++;
+            onFragmentVisible(mFragmentVisibleIndex);
         } else {
-            viewPagerFragmentVisible = false;
-            viewPagerFragmentFirstVisible = false;
-            onViewPagerFragmentInVisible(viewPagerFragmentVisibleIndex);
+            onFragmentInVisible(mFragmentVisibleIndex);
         }
     }
 
     /**
      * Fragment取消预加载后,获取显隐状态
      */
-    public final boolean isViewPagerFragmentVisible() {
-        return viewPagerFragmentVisible;
-    }
-
-    /**
-     * Fragment取消预加载后,获取首次显隐状态
-     */
-    public final boolean isViewPagerFragmentFirstVisible() {
-        return viewPagerFragmentFirstVisible;
+    public final boolean isFragmentVisible() {
+        return mFragmentVisible;
     }
 
     /**
      * Fragment取消预加载后,获取显示计数
      */
-    public final int getViewPagerFragmentVisibleIndex() {
-        return viewPagerFragmentVisibleIndex;
+    public final int getFragmentVisibleIndex() {
+        return mFragmentVisibleIndex;
     }
 
     /**
