@@ -10,7 +10,7 @@ ext {
     // 渠道打包库
     marketer = "com.github.AcmenXD:Marketer:3.2"
     // 列表库
-    recyclerview = "com.github.AcmenXD:RecyclerView:3.2"
+    recyclerview = "com.github.AcmenXD:RecyclerView:3.3"
     // 响应式编程库
     rxandroid = "io.reactivex:rxandroid:1.2.0"
     // 权限处理库

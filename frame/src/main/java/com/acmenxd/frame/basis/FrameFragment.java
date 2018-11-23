@@ -88,9 +88,11 @@ public abstract class FrameFragment extends Fragment implements IFrameSubscripti
     private int customStatusBarColorId_noCan = 0; // 自定义状态栏背景色 - 不可行时
     private boolean isCanCustomStatusBarColor = false; // 是否支持自定义状态栏
     protected int customStatusBarMode = 0; // 状态栏模式 : 0-跟随父Activity  1-自定义背景色  2-浅色模式+自定义背景色  3-深色模式+自定义背景色
-    // Fragment取消预加载后的显隐状态
+    // Fragment是否能控制显隐状态(ViewPager预加载的显隐状态)
+    private boolean mCanControlFragmentVisible = false;
+    // Fragment预加载时的显隐状态
     private boolean mFragmentVisible;
-    // Fragment取消预加载后的显示计数(第一次显示计数为1)
+    // Fragment预加载时的显示计数
     private int mFragmentVisibleIndex;
     // 网络状态监控
     private IMonitorListener mNetListener = new IMonitorListener() {
@@ -212,14 +214,14 @@ public abstract class FrameFragment extends Fragment implements IFrameSubscripti
      * Fragment取消预加载后,显示时回调函数
      */
     @CallSuper
-    protected void onFragmentVisible(@IntRange(from = 0) int pFragmentVisibleIndex) {
+    protected void onFragmentVisible(boolean pCanControlFragmentVisible, @IntRange(from = 0) int pFragmentVisibleIndex) {
     }
 
     /**
      * Fragment取消预加载后,隐藏时回调函数
      */
     @CallSuper
-    protected void onFragmentInVisible(@IntRange(from = 0) int pFragmentVisibleIndex) {
+    protected void onFragmentInVisible(boolean pCanControlFragmentVisible, @IntRange(from = 0) int pFragmentVisibleIndex) {
     }
 
     /**
@@ -312,29 +314,37 @@ public abstract class FrameFragment extends Fragment implements IFrameSubscripti
     }
 
     /**
-     * Fragment取消预加载处理
+     * Fragment预加载状态处理
      */
     @Override
     public final void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
+        mCanControlFragmentVisible = true;
         mFragmentVisible = getUserVisibleHint();
         if (mFragmentVisible) {
             mFragmentVisibleIndex++;
-            onFragmentVisible(mFragmentVisibleIndex);
+            onFragmentVisible(mCanControlFragmentVisible, mFragmentVisibleIndex);
         } else {
-            onFragmentInVisible(mFragmentVisibleIndex);
+            onFragmentInVisible(mCanControlFragmentVisible, mFragmentVisibleIndex);
         }
     }
 
     /**
-     * Fragment取消预加载后,获取显隐状态
+     * Fragment是否能控制显隐状态(ViewPager预加载的显隐状态)
+     */
+    public final boolean isCanControlFragmentVisible() {
+        return mCanControlFragmentVisible;
+    }
+
+    /**
+     * Fragment预加载时的显隐状态
      */
     public final boolean isFragmentVisible() {
         return mFragmentVisible;
     }
 
     /**
-     * Fragment取消预加载后,获取显示计数
+     * Fragment预加载时的显示计数
      */
     public final int getFragmentVisibleIndex() {
         return mFragmentVisibleIndex;
