@@ -44,6 +44,7 @@ public final class ConfigBuilder {
         try {
             Constructor<? extends FrameConfig> constructor = pConfig.getDeclaredConstructor(boolean.class);
             sFrameConfig = constructor.newInstance(isDebug);
+            sFrameConfig.init();
         } catch (NoSuchMethodException pE) {
             pE.printStackTrace();
         } catch (InstantiationException pE) {

@@ -15,28 +15,17 @@ import com.acmenxd.toaster.ToastNW;
  * @date 2017/5/25 10:02
  * @detail 配置详细参数类
  */
-public class FrameConfig {
-    protected FrameConfig() {
-        DEBUG = false;
-        LOG_OPEN = DEBUG;
-        TOAST_DEBUG_OPEN = DEBUG;
-        init();
-    }
-
+public abstract class FrameConfig {
     protected FrameConfig(boolean isDebug) {
         DEBUG = isDebug;
         LOG_OPEN = DEBUG;
         TOAST_DEBUG_OPEN = DEBUG;
-        init();
     }
 
     /**
      * 初始化
      */
-    @CallSuper
-    protected void init() {
-
-    }
+    protected abstract void init();
 
     /**
      * 调试模式开关
