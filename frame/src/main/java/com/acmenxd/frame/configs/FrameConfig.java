@@ -1,7 +1,6 @@
 package com.acmenxd.frame.configs;
 
 import android.os.Environment;
-import android.support.annotation.CallSuper;
 
 import com.acmenxd.logger.LogTag;
 import com.acmenxd.logger.LogType;
