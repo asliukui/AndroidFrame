@@ -69,16 +69,16 @@ public abstract class FrameApplication extends Application {
     @CallSuper
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        // 应用配置变更~
+        // 应用配置变更
         super.onConfigurationChanged(newConfig);
     }
 
     /**
      * 初始化配置
      */
-    protected final void initFrameSetting(@NonNull Class<? extends FrameConfig> pConfig, @NonNull boolean isDebug) {
+    protected final void initFrameSetting(@NonNull FrameConfig pFrameConfig) {
         // 创建模块配置
-        ConfigBuilder.createConfig(pConfig, isDebug);
+        ConfigBuilder.createConfig(pFrameConfig);
         // 初始化File配置
         FileUtils.init();
         // 初始化网络监听配置
@@ -90,8 +90,8 @@ public abstract class FrameApplication extends Application {
     /**
      * 获取配置详情
      */
-    public final <T extends FrameConfig> T getConfig() {
-        return ConfigBuilder.getConfigInfo();
+    public final <T extends FrameConfig> T getFrameConfig() {
+        return ConfigBuilder.getFrameConfig();
     }
 
     /**
@@ -136,7 +136,7 @@ public abstract class FrameApplication extends Application {
         }
         if (result) {
             try {
-                Debug.dumpHprofData(getConfig().LOG_DIR + fileName);
+                Debug.dumpHprofData(getFrameConfig().LOG_DIR + fileName);
             } catch (IOException pE1) {
                 Logger.e("crashException:" + pE1.getMessage());
             }

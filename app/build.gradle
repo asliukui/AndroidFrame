@@ -22,5 +22,6 @@ android {
 }
 
 dependencies {
+//    api "com.github.AcmenXD:AndroidFrame:2.0"
     compile project(':frame')
 }

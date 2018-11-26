@@ -27,7 +27,7 @@ public final class BaseApplication extends FrameApplication {
         startTime = System.currentTimeMillis();
 
         // 配置框架设置
-        // initFrameSetting(AppFrameConfig.class, AppConfig.DEBUG);
+        initFrameSetting(new AppFrameConfig(true));
 
         // 初始化完毕
         isInitFinish = true;

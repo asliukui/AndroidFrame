@@ -32,8 +32,8 @@ public final class FileUtils {
     /**
      * String 路径
      */
-    public static String BASE_DIR = FrameApplication.instance().getConfig().BASE_DIR;
-    public static String LOG_DIR = FrameApplication.instance().getConfig().LOG_DIR;
+    public static String BASE_DIR = FrameApplication.instance().getFrameConfig().BASE_DIR;
+    public static String LOG_DIR = FrameApplication.instance().getFrameConfig().LOG_DIR;
     public static String cacheDirPath = BASE_DIR + "Cache/";//缓存路径
     public static String imgCacheDirPath = BASE_DIR + "Image/cache/";//图片缓存路径
     public static String imgSaveDirPath = BASE_DIR + "Image/save/";//图片保存路径

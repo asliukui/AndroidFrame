@@ -13,8 +13,6 @@ import com.acmenxd.toaster.Toaster;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * @author AcmenXD
@@ -30,7 +28,7 @@ public final class ConfigBuilder {
     /**
      * 获取配置详情
      */
-    public static <T extends FrameConfig> T getConfigInfo() {
+    public static <T extends FrameConfig> T getFrameConfig() {
         if (sFrameConfig != null) {
             return (T) sFrameConfig;
         }
@@ -40,32 +38,19 @@ public final class ConfigBuilder {
     /**
      * 创建配置详情
      */
-    public static void createConfig(@NonNull Class<? extends FrameConfig> pConfig, @NonNull boolean isDebug) {
-        try {
-            Constructor<? extends FrameConfig> constructor = pConfig.getDeclaredConstructor(boolean.class);
-            sFrameConfig = constructor.newInstance(isDebug);
-            sFrameConfig.init();
-        } catch (NoSuchMethodException pE) {
-            pE.printStackTrace();
-        } catch (InstantiationException pE) {
-            pE.printStackTrace();
-        } catch (IllegalAccessException pE) {
-            pE.printStackTrace();
-        } catch (InvocationTargetException pE) {
-            pE.printStackTrace();
-        }
-        // 初始化
-        init();
-    }
-
-    /**
-     * 初始化
-     * * 基础组件配置
-     */
-    private static void init() {
-        if (sFrameConfig == null) {
+    public static void createConfig(@NonNull FrameConfig pFrameConfig) {
+        if (pFrameConfig == null) {
             throw new NullPointerException("FrameConfig is null");
         }
+        if (sFrameConfig != null) {
+            return;
+        }
+        sFrameConfig = pFrameConfig;
+        sFrameConfig.init();
+
+        /**
+         * 基础组件配置
+         */
         Context context = FrameApplication.instance().getApplicationContext();
         //------------------------------------Logger配置---------------------------------
         Logger.APP_PKG_NAME = context.getPackageName();
