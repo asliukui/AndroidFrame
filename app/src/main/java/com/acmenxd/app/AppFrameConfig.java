@@ -1,6 +1,6 @@
 package com.acmenxd.app;
 
-import com.acmenxd.frame.configs.FrameConfig;
+import com.acmenxd.frame.basis.FrameConfig;
 
 /**
  * @author AcmenXD
