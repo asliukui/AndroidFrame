@@ -1,1 +1,1 @@
-include ':frame'
+include ':frame', ':app'
