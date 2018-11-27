@@ -17,7 +17,7 @@
 	}
 ```
 ```
-	 compile 'com.github.AcmenXD:AndroidFrame:1.8'
+	 compile 'com.github.AcmenXD:AndroidFrame:2.1'
 ```
 ### 混淆
 ---
@@ -70,12 +70,6 @@
 
 ### 框架解析
 ---
-**configs**
-```java
--> FrameConfig    : 基础配置信息,项目配置必须继承此类,从而拓展其他配置!  例如:AppFrameConfig/OtherConfit(每个项目都有一份单独的配置清单)
--> ConfigBuilder : 框架进行初始化操作类,包括初始化第三方组件/类库
-```
----
 **basis**
 ```java
 -> impl包               : 框架层所需的接口基类
@@ -86,6 +80,7 @@
 -> FrameService         : 框架层Service,实现Subscription | Presenter支持,网络状态监控,Net支持,以及销毁等
 -> FramePresenter       : 框架层Presenter,实现Subscription支持,网络状态监控,Net支持,以及销毁等
 -> FrameModel           : 框架层Model,实现Subscription支持,网络状态监控,Net支持,以及销毁等
+-> FrameConfig    : 基础配置信息,项目配置必须继承此类,从而拓展其他配置!  例如:AppFrameConfig/OtherConfit(每个项目都有一份单独的配置清单)
 -> ActivityStackManager : Activity堆栈管理器,提供exit | restartApp支持
 ```
 ---
