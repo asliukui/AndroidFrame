@@ -24,5 +24,6 @@ public final class AppFrameConfig extends FrameConfig {
         DB_NAME = "test_db";
         BASE_DIR = SDCARD_DIR + "/TestApp/";
         spAll = new String[]{SP_Cookie, SP_Device, SP_Config, SP_User};
+        BASE_URL = "http://www.baidu.com";
     }
 }
